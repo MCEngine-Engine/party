@@ -1,0 +1,6 @@
+name: MCEngineParty
+version: ${version}
+main: io.github.mcengine.spigotmc.party.engine.MCEnginePartySpigotMC
+author: MCEngine
+description: MCEngine Party
+api-version: 1.13
