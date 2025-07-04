@@ -7,7 +7,7 @@ dependencies {
 
     implementation 'io.github.mcengine:core-api:1.0.6-RELEASE'
     implementation 'io.github.mcengine:party-api:1.0.0-SNAPSHOT'
-    implementation 'io.github.mcengine:party-common:1.0.0-4-SNAPSHOT'
+    implementation 'io.github.mcengine:party-common:1.0.0-5-SNAPSHOT'
 }
 
 processResources {
