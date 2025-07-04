@@ -53,7 +53,7 @@ public class MCEnginePartySpigotMC extends JavaPlugin {
         this.getCommand("party").setTabCompleter(new MCEnginePartyCompleter());
 
         // Register listener for player party leave on quit
-        getServer().getPluginManager().registerEvents(new MCEnginePartyListener(partyCommon), this);
+        /* getServer().getPluginManager().registerEvents(new MCEnginePartyListener(partyCommon), this); */
 
         // Load extensions
         MCEngineApi.loadExtensions(
