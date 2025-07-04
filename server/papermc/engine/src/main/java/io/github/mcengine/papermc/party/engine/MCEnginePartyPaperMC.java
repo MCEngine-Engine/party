@@ -1,22 +1,59 @@
-package io.github.mcengine.paeprmc.party.engine;
+package io.github.mcengine.papermc.party.engine;
 
 import io.github.mcengine.api.core.MCEngineApi;
 import io.github.mcengine.api.core.Metrics;
+import io.github.mcengine.common.party.MCEnginePartyCommon;
+import io.github.mcengine.common.party.command.MCEnginePartyCommand;
+import io.github.mcengine.common.party.listener.MCEnginePartyListener;
+import io.github.mcengine.common.party.tabcompleter.MCEnginePartyCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * Main Paper plugin class for the MC Engine Party system.
+ * Handles plugin lifecycle, command, and event registration.
+ */
 public class MCEnginePartyPaperMC extends JavaPlugin {
 
+    /**
+     * The main party logic handler.
+     */
+    private MCEnginePartyCommon partyCommon;
+
+    /**
+     * Called when the plugin is enabled.
+     * Registers commands, listeners, loads extensions and checks for updates.
+     */
     @Override
     public void onEnable() {
+        // Initialize bStats metrics
         new Metrics(this, 25764);
-        saveDefaultConfig(); // Save config.yml if it doesn't exist
 
+        // Save default config if it doesn't exist
+        saveDefaultConfig();
+
+        // Check config if plugin is enabled
         boolean enabled = getConfig().getBoolean("enable", false);
         if (!enabled) {
             getLogger().warning("Plugin is disabled in config.yml (enable: false). Disabling plugin...");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+
+        // =========================
+        // Register MC Engine Party
+        // =========================
+
+        // Initialize core party logic
+        this.partyCommon = new MCEnginePartyCommon(this);
+
+        // Register command executor for /party
+        this.getCommand("party").setExecutor(new MCEnginePartyCommand(partyCommon));
+
+        // Register tab completer for /party
+        this.getCommand("party").setTabCompleter(new MCEnginePartyCompleter());
+
+        // Register listener for player party leave on quit
+        getServer().getPluginManager().registerEvents(new MCEnginePartyListener(partyCommon), this);
 
         // Load extensions
         MCEngineApi.loadExtensions(
@@ -44,9 +81,15 @@ public class MCEnginePartyPaperMC extends JavaPlugin {
             "DLC"
         );
 
+        // Check for plugin updates
         MCEngineApi.checkUpdate(this, getLogger(), "github", "MCEngine", "party-engine", getConfig().getString("github.token", "null"));
     }
 
+    /**
+     * Called when the plugin is disabled.
+     */
     @Override
-    public void onDisable() {}
+    public void onDisable() {
+        // No special shutdown logic needed.
+    }
 }
