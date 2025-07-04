@@ -4,3 +4,9 @@ main: io.github.mcengine.papermc.party.engine.MCEnginePartySpigotMC
 author: MCEngine
 description: MCEngine Party
 api-version: 1.13
+
+commands:
+  party:
+    description: Main party command
+    usage: /party <create|invite|kick|leave>
+    aliases: []
