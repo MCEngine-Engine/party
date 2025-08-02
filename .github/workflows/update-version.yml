@@ -1,5 +1,5 @@
 name: Morning Version and Dependencies Auto-Update (Thailand Time)
-true:
+'on':
   schedule:
   - cron: 0 23 * * *
   workflow_dispatch: null
