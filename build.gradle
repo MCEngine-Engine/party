@@ -30,7 +30,7 @@ allprojects {
     group = 'io.github.mcengine'
 
     apply plugin: 'java'
-    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'com.gradleup.shadow'
 
     repositories {
         mavenCentral()
@@ -71,7 +71,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'com.gradleup.shadow'
 
     def versionPropertyKey = project.path.replace(':', '-')
     if (versionPropertyKey.startsWith('-')) {
