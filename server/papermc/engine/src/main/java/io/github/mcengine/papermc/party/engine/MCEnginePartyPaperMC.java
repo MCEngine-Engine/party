@@ -1,6 +1,6 @@
 package io.github.mcengine.papermc.party.engine;
 
-import io.github.mcengine.api.core.MCEngineApi;
+import io.github.mcengine.api.core.MCEngineCoreApi;
 import io.github.mcengine.api.core.Metrics;
 import io.github.mcengine.common.party.MCEnginePartyCommon;
 import io.github.mcengine.common.party.command.MCEnginePartyCommand;
@@ -56,25 +56,25 @@ public class MCEnginePartyPaperMC extends JavaPlugin {
         /* getServer().getPluginManager().registerEvents(new MCEnginePartyListener(partyCommon), this); */
 
         // Load extensions
-        MCEngineApi.loadExtensions(
+        MCEngineCoreApi.loadExtensions(
             this,
             "io.github.mcengine.api.party.extension.library.IMCEnginePartyLibrary",
             "libraries",
             "Library"
         );
-        MCEngineApi.loadExtensions(
+        MCEngineCoreApi.loadExtensions(
             this,
             "io.github.mcengine.api.party.extension.api.IMCEnginePartyAPI",
             "apis",
             "API"
         );
-        MCEngineApi.loadExtensions(
+        MCEngineCoreApi.loadExtensions(
             this,
             "io.github.mcengine.api.party.extension.addon.IMCEnginePartyAddOn",
             "addons",
             "AddOn"
         );
-        MCEngineApi.loadExtensions(
+        MCEngineCoreApi.loadExtensions(
             this,
             "io.github.mcengine.api.party.extension.dlc.IMCEnginePartyDLC",
             "dlcs",
@@ -82,7 +82,7 @@ public class MCEnginePartyPaperMC extends JavaPlugin {
         );
 
         // Check for plugin updates
-        MCEngineApi.checkUpdate(this, getLogger(), "github", "MCEngine", "party-engine", getConfig().getString("github.token", "null"));
+        MCEngineCoreApi.checkUpdate(this, getLogger(), "github", "MCEngine", "party-engine", getConfig().getString("github.token", "null"));
     }
 
     /**
