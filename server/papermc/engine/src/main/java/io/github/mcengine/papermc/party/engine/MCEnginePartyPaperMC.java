@@ -89,7 +89,7 @@ public class MCEnginePartyPaperMC extends JavaPlugin {
         );
 
         // Check for plugin updates
-        MCEngineCoreApi.checkUpdate(this, getLogger(), "github", "MCEngine", "party-engine", getConfig().getString("github.token", "null"));
+        MCEngineCoreApi.checkUpdate(this, getLogger(), "github", "MCEngine-Engine", "party", getConfig().getString("github.token", "null"));
     }
 
     /**
