@@ -1,5 +1,8 @@
 enable: false
 
+# If set to 0, there is no limit
+limit: 6
+
 # Database support
 # - sqlite
 # - mysql
@@ -23,8 +26,3 @@ database:
     name: mcengine
     user: postgres
     password: ""
-
-  mongodb:
-    uri: mongodb://localhost:27017
-    name: mcengine
-    collection: party
