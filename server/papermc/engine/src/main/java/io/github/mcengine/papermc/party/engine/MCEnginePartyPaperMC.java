@@ -6,6 +6,8 @@ import io.github.mcengine.common.party.MCEnginePartyCommon;
 import io.github.mcengine.common.party.command.MCEnginePartyCommand;
 import io.github.mcengine.common.party.listener.MCEnginePartyListener;
 import io.github.mcengine.common.party.tabcompleter.MCEnginePartyCompleter;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -15,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MCEnginePartyPaperMC extends JavaPlugin {
 
     /**
-     * The main party logic handler.
+     * The main party logic handler and anchor for the command dispatcher.
      */
     private MCEnginePartyCommon partyCommon;
 
@@ -46,11 +48,16 @@ public class MCEnginePartyPaperMC extends JavaPlugin {
         // Initialize core party logic
         this.partyCommon = new MCEnginePartyCommon(this);
 
-        // Register command executor for /party
-        this.getCommand("party").setExecutor(new MCEnginePartyCommand(partyCommon));
+        // Register command namespace and dispatcher (migrated to "/party default <subcommand>")
+        String namespace = "party";
+        partyCommon.registerNamespace(namespace);
+        partyCommon.registerSubCommand(namespace, "default", new MCEnginePartyCommand(partyCommon));
+        partyCommon.registerSubTabCompleter(namespace, "default", new MCEnginePartyCompleter());
 
-        // Register tab completer for /party
-        this.getCommand("party").setTabCompleter(new MCEnginePartyCompleter());
+        // Assign dispatcher to command
+        CommandExecutor dispatcher = partyCommon.getDispatcher(namespace);
+        getCommand(namespace).setExecutor(dispatcher);
+        getCommand(namespace).setTabCompleter((TabCompleter) dispatcher); // Dispatcher implements both interfaces
 
         // Register listener for player party leave on quit
         /* getServer().getPluginManager().registerEvents(new MCEnginePartyListener(partyCommon), this); */
