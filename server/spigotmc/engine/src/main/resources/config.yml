@@ -1,4 +1,5 @@
 enable: false
+license: free
 
 # If set to 0, there is no limit
 limit: 6
