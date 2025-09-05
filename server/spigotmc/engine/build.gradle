@@ -5,11 +5,11 @@ plugins {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21.7-R0.1-SNAPSHOT'
 
-    implementation 'io.github.mcengine:core-api:2025.0.9-5'
+    implementation 'io.github.mcengine:core-api:2025.0.9-6'
 
-    implementation 'io.github.mcengine:hologram-api:2025.0.9-5'
-    implementation 'io.github.mcengine:party-api:2025.0.9-5'
-    implementation 'io.github.mcengine:party-common:2025.0.9-5'
+    implementation 'io.github.mcengine:hologram-api:2025.0.9-6'
+    implementation 'io.github.mcengine:party-api:2025.0.9-6'
+    implementation 'io.github.mcengine:party-common:2025.0.9-6'
 }
 
 processResources {
