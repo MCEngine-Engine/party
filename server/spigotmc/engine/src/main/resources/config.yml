@@ -1,5 +1,7 @@
 enable: false
-license: free
+licenses:
+  license: free
+  secret_key:
 
 # If set to 0, there is no limit
 limit: 6
